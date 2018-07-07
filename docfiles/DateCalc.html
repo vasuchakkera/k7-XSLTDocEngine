@@ -1,0 +1,508 @@
+<html xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:k7="http://www.k7-Xsuites.com">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>DateCalc.xsl</title><style type="text/css">
+         
+                        
+                        
+            
+::-webkit-scrollbar-track
+{
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+            background-color: grey;
+                        border-radius: 10px;
+}
+
+::-webkit-scrollbar
+{
+            width: 10px;
+            background-color: #CCCCCC;
+}
+
+::-webkit-scrollbar-corner
+
+{
+background-color: #CCCCCC; 
+
+}
+
+::-webkit-scrollbar-thumb
+{
+            background-color:  #CCCCCC;
+            background-image: -webkit-linear-gradient(90deg,
+            rgba(0, 0, 0, 1) 0%,
+                                                      rgba(0, 0, 0, 1) 25%,
+                                                      transparent 100%,
+                                                                                                                                      rgba(0, 0, 0, 0) 75%,
+                                                                                                                                      transparent 100%)
+                                                                                                                                      
+}
+                        
+                        body {
+                                    margin: 0;
+                                    padding: 0;
+                                    overflow: hidden;
+                                    height: 100%; 
+                                    max-height: 100%; 
+                                    font-family:"Georgia;"
+            
+                                    line-height: 1.5em;
+                        }
+
+                        main {
+                                    position: fixed;
+                                    top: 80px; /* Set this to the height of 
+
+the header */
+                                    bottom: 50px; /* Set this to the height 
+
+of the footer */
+                                    left: 230px; 
+                                    right: 0;
+                                    overflow: auto; 
+                                    background: #fff;
+                        }
+                                                
+                        #header {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 80px; 
+                                    overflow: hidden; /* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" */
+                                    background: #CCCCCC;
+                        }
+
+                        #footer {
+                                    position: absolute;
+                                    left: 0;
+                                    bottom: 0;
+                                    width: 100%;
+                                    height: 50px; 
+                                    overflow: hidden; /* Disables scrollbars on the footer frame. To enable scrollbars, change "hidden" to "scroll" */
+                                    background: #CCCCCC;
+                        }
+                                                
+                        #nav {
+                                    position: absolute; 
+                                    top: 80px; /* Set this to the height of the header */
+                                    bottom: 50px; /* Set this to the height of the footer */
+                                    left: 0; 
+                                    width: 260px;
+                                    overflow: scroll; /* Scrollbars will appear on this frame only when there's enough content to require scrolling. To disable scrollbars, change to "hidden", or use "scroll" to enable permanent scrollbars */
+                                    background: grey;               
+                        }
+                        
+                        .innertube {
+                                    margin-left: 40px; /* Provides padding for the content */
+                        }
+                        
+                        p {
+                                    color: #555;
+                        }
+
+                        nav ul {
+                                    list-style-type: none;
+                                    margin: 0;
+                                    padding: 0;
+                        }
+                        
+                        nav ul a {
+                                    color: black;
+                                    text-decoration: none;
+                        }
+                                                
+                        /*IE6 fix*/
+                        * html body{
+                                    padding: 50px 0 50px 230px; /* Set the first value to the height of the header, the third value to the height of the footer, and last value to the width of the nav */
+                        }
+                        
+                        * html main{ 
+                                    height: 100%; 
+                                    width: 100%; 
+                        }
+                        
+                   
+
+</style><script type="text/javascript"></script></head>
+   <body>
+      <header id="header">
+         <div class="innertube" align="center" style="margin-bottom:5px">
+            <h2>Stylesheet Documentation for the XSL : DateCalc.xsl<br><br></h2>
+         </div>
+      </header>
+      <main>
+         <div class="innertube">
+            <div>
+               <h3><a name="version-control"></a>Version Control
+               </h3>
+            </div>
+            <div><a name="xslt-version"></a><h3>XSLT Version </h3>The current XSLT is written in XSLT version <b>2.0</b></div>
+            <div><a name="intro"></a><div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px">
+                  <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"></div>
+                  <div>This XSLT has functions for Date calculations. These functions are used by the calendar
+                     service module 
+                  </div>
+               </div><br></div><a name="vars"></a><h3>Global Variable Definitions</h3>
+            <table style="table-layout: fixed; width: 100%" border="1">
+               <tbody>
+                  <tr>
+                     <th colspan="40%">Variabe Name</th>
+                     <th colspan="60%">Selects</th>
+                  </tr>
+                  <tr>
+                     <td colspan="40%" style="padding-left:0.5cm"><a name="Indicators"></a>Indicators
+                     </td>
+                     <td style="word-wrap: break-word" colspan="60%">
+                        <div style="word-wrap: break-word; padding-left:0.5cm"><a name=""></a>$<a href="#date">date</a>/Indicators&nbsp;
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="40%" style="padding-left:0.5cm"><a name="date"></a>date
+                     </td>
+                     <td style="word-wrap: break-word" colspan="60%">
+                        <div style="word-wrap: break-word; padding-left:0.5cm"><a name=""></a>/root/date&nbsp;
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="40%" style="padding-left:0.5cm"><a name="date-display-indicator"></a>date-display-indicator
+                     </td>
+                     <td style="word-wrap: break-word" colspan="60%">
+                        <div style="word-wrap: break-word; padding-left:0.5cm"><a name=""></a>$<a href="#Indicators">Indicators</a>/displaydate&nbsp;
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="40%" style="padding-left:0.5cm"><a name="day-display-indicator"></a>day-display-indicator
+                     </td>
+                     <td style="word-wrap: break-word" colspan="60%">
+                        <div style="word-wrap: break-word; padding-left:0.5cm"><a name=""></a>$<a href="#Indicators">Indicators</a>/displayday&nbsp;
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="40%" style="padding-left:0.5cm"><a name="month-display-indicator"></a>month-display-indicator
+                     </td>
+                     <td style="word-wrap: break-word" colspan="60%">
+                        <div style="word-wrap: break-word; padding-left:0.5cm"><a name=""></a>$<a href="#Indicators">Indicators</a>/diplaymonth&nbsp;
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table><a name="function"></a><h3>Functions List</h3>
+            <table style="table-layout: fixed; width: 100%" border="1">
+               <tr>
+                  <td><a href="#Templatefunctx:mmddyyyy-to-date">functx:mmddyyyy-to-date</a></td>
+                  <td><a href="#Templatefunctx:day-of-week-abbrev-en">functx:day-of-week-abbrev-en</a></td>
+                  <td><a href="#Templatefunctx:day-of-week">functx:day-of-week</a></td>
+                  <td><a href="#Templatefunctx:day-of-week-name-en">functx:day-of-week-name-en</a></td>
+               </tr>
+            </table>
+            <h3>Function Definitions</h3>
+            <div>
+               <h4><a name="Templatefunctx:day-of-week">Function : functx:day-of-week</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for functx:day-of-week</h3>
+                        
+                        <div>This function does the
+                           								following
+                           								
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>a</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>b</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>c</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="functx:day-of-week_date"></a>date
+                     </li><br></div>
+                  <div> If  the condition  $<a href="#month-display-indicator">month-display-indicator</a>&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;'&nbsp;yes&nbsp;'&nbsp;&nbsp;&nbsp;and&nbsp;&nbsp;$<a href="#date-display-indicator">date-display-indicator</a>&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;'&nbsp;yes&nbsp;'&nbsp;&nbsp;&nbsp;and&nbsp;&nbsp;$<a href="#day-display-indicator">day-display-indicator</a>&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;'&nbsp;yes&nbsp;'&nbsp;&nbsp;&nbsp;&nbsp; is satisfied , then do : 
+                     <div style="margin:0.5cm">
+                        <div>Produce a sequence of nodes or atomic values, specified by Xpath :</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;&nbsp;(empty($<a href="#functx:day-of-week_date">date</a>))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xs:integer((xs:date($<a href="#functx:day-of-week_date">date</a>)&nbsp;-&nbsp;xs:date(&nbsp;'&nbsp;1901-01-06&nbsp;'&nbsp;))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;div&nbsp;&nbsp;xs:dayTimeDuration(&nbsp;'&nbsp;P1D&nbsp;'&nbsp;))&nbsp;&nbsp;mod&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+            <div>
+               <h4><a name="Templatefunctx:day-of-week-abbrev-en">Function : functx:day-of-week-abbrev-en</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for functx:day-of-week-abbrev-en</h3>
+                        
+                        <div>This function does the
+                           								following
+                           								
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>a</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>b</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>c</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="functx:day-of-week-abbrev-en_date"></a>date
+                     </li><br></div>
+                  <div>Produce a sequence of nodes or atomic values, specified by Xpath :</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;'&nbsp;Sun&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;Mon&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;Tues&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;Wed&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;Thurs&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;Fri&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;Sat&nbsp;'&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;functx:<a href="#Templatefunctx:day-of-week">day-of-week</a>($<a href="#functx:day-of-week-abbrev-en_date">date</a>)&nbsp;&nbsp;+&nbsp;&nbsp;1&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+            <div>
+               <h4><a name="Templatefunctx:day-of-week-name-en">Function : functx:day-of-week-name-en</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for functx:day-of-week-name-en</h3>
+                        
+                        <div>This function does the
+                           								following
+                           								
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>a</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>b</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>c</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="functx:day-of-week-name-en_date"></a>date
+                     </li><br></div>
+                  <div>Produce a sequence of nodes or atomic values, specified by Xpath :</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;'&nbsp;Sunday&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;'&nbsp;Monday&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;'&nbsp;Tuesday&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;'&nbsp;Wednesday&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;Thursday&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;'&nbsp;Friday&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;'&nbsp;Saturday&nbsp;'&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;functx:<a href="#Templatefunctx:day-of-week">day-of-week</a>($<a href="#functx:day-of-week-name-en_date">date</a>)&nbsp;&nbsp;+&nbsp;&nbsp;1&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+            <div>
+               <h4><a name="Templatefunctx:mmddyyyy-to-date">Function : functx:mmddyyyy-to-date</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for functx:mmddyyyy-to-date</h3>
+                        
+                        <div>This function changes the date from mmddyyyy to a date</div>
+                        
+                        <div> Examples</div>
+                        
+                        
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div> functx:mmddyyyy-to-date('12-15-2004') results in 2004-12-15</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div> functx:mmddyyyy-to-date('12152004') results in 2004-12-15 </div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div> functx:mmddyyyy-to-date('12/15/2004') results in  2004-12-15</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                        <div>History:</div>
+                        
+                        <div>Some background information for this function. In the input XML there are three
+                           indicators namely
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>displaydate</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>displayday</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>displaymonth</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                        <div>When these three indicators are set to 'yes' , only then we should be returning a
+                           value. if any of these have a value other than 'yes' then this function returns null.
+                           This functionality was introduced in the Sprint 13 , When a new rule was rolled out,
+                           and dictated that these dates should only be populated when the clients want them
+                           to
+                           be. 
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>Published On  2006-06-27</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>Last Updated 2004-12-15 </div>
+                              
+                           </li>
+                           
+                           
+                        </ul>
+                        
+                        <div>
+                           <ul>
+                              
+                              <div>
+                                 <ul>
+                                    
+                                    <li>personname : Priscilla Walmsley</li>
+                                    
+                                    <li>email : pwalmsley@datypic.com</li>
+                                    
+                                    <li>contrib : ..</li>
+                                    
+                                    <li>uri :  http://www.datypic.com</li>
+                                    
+                                 </ul>
+                              </div>
+                              
+                           </ul>
+                        </div>
+                        
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="functx:mmddyyyy-to-date_dateString"></a>dateString
+                     </li><br></div>
+                  <div> If  the condition  $<a href="#month-display-indicator">month-display-indicator</a>&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;'&nbsp;yes&nbsp;'&nbsp;&nbsp;&nbsp;and&nbsp;&nbsp;$<a href="#date-display-indicator">date-display-indicator</a>&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;'&nbsp;yes&nbsp;'&nbsp;&nbsp;&nbsp;and&nbsp;&nbsp;$<a href="#day-display-indicator">day-display-indicator</a>&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;'&nbsp;yes&nbsp;'&nbsp;&nbsp;&nbsp;&nbsp; is satisfied , then do : 
+                     <div style="margin:0.5cm">
+                        <div>Produce a sequence of nodes or atomic values, specified by Xpath :</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;&nbsp;(empty($<a href="#functx:mmddyyyy-to-date_dateString">dateString</a>))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;&nbsp;(not(matches($<a href="#functx:mmddyyyy-to-date_dateString">dateString</a>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;^\D*(\d{2})\D*(\d{2})\D*(\d{4})\D*$&nbsp;'&nbsp;)))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(xs:QName(&nbsp;'&nbsp;functx:Invalid_Date_Format&nbsp;'&nbsp;))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xs:date(replace($<a href="#functx:mmddyyyy-to-date_dateString">dateString</a>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;^\D*(\d{2})\D*(\d{2})\D*(\d{4})\D*$&nbsp;'&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;$3-$1-$2&nbsp;'&nbsp;))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     </div>
+                  </div>
+                  <div><i style="color:grey">&lt;!-- Examples
+                        XPath Example	Results
+                        functx:mmddyyyy-to-date('12-15-2004')
+                        2004-12-15
+                        functx:mmddyyyy-to-date('12152004')
+                        2004-12-15
+                        functx:mmddyyyy-to-date('12/15/2004')
+                        2004-12-15
+                        History
+                        Published On	Last Updated	Contributor(s)
+                        2006-06-27	2007-02-26	Priscilla Walmsley, Datypic, pwalmsley@datypic.com, http://www.datypic.com--&gt;</i></div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+         </div>
+      </main>
+      <nav id="nav">
+         <div class="innertube">
+            <h2>Table of contents</h2>
+            <ul>
+               <li><a href="#version-control">Version Control</a></li>
+               <li><a href="#xslt-version">XSLT Version</a></li>
+               <li><a href="#intro">Introduction</a></li>
+               <li><a href="#vars">Global Variables</a></li>
+               <li><a href="#function">Functions</a></li>
+               <li><a href="../index.html">XSLT Documentation Index</a></li>
+            </ul>
+         </div>
+      </nav>
+      <footer id="footer">
+         <div class="innertube" align="center" style="margin:5px">
+            <p>Stylesheet Documentation Created by K7-Labs by Vasu Chakkera</p>
+         </div>
+      </footer>
+   </body>
+</html>

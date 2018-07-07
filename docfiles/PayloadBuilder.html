@@ -1,0 +1,219 @@
+<html xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:k7="http://www.k7-Xsuites.com">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>PayloadBuilder.xsl</title><style type="text/css">
+         
+                        
+                        
+            
+::-webkit-scrollbar-track
+{
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+            background-color: grey;
+                        border-radius: 10px;
+}
+
+::-webkit-scrollbar
+{
+            width: 10px;
+            background-color: #CCCCCC;
+}
+
+::-webkit-scrollbar-corner
+
+{
+background-color: #CCCCCC; 
+
+}
+
+::-webkit-scrollbar-thumb
+{
+            background-color:  #CCCCCC;
+            background-image: -webkit-linear-gradient(90deg,
+            rgba(0, 0, 0, 1) 0%,
+                                                      rgba(0, 0, 0, 1) 25%,
+                                                      transparent 100%,
+                                                                                                                                      rgba(0, 0, 0, 0) 75%,
+                                                                                                                                      transparent 100%)
+                                                                                                                                      
+}
+                        
+                        body {
+                                    margin: 0;
+                                    padding: 0;
+                                    overflow: hidden;
+                                    height: 100%; 
+                                    max-height: 100%; 
+                                    font-family:"Georgia;"
+            
+                                    line-height: 1.5em;
+                        }
+
+                        main {
+                                    position: fixed;
+                                    top: 80px; /* Set this to the height of 
+
+the header */
+                                    bottom: 50px; /* Set this to the height 
+
+of the footer */
+                                    left: 230px; 
+                                    right: 0;
+                                    overflow: auto; 
+                                    background: #fff;
+                        }
+                                                
+                        #header {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 80px; 
+                                    overflow: hidden; /* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" */
+                                    background: #CCCCCC;
+                        }
+
+                        #footer {
+                                    position: absolute;
+                                    left: 0;
+                                    bottom: 0;
+                                    width: 100%;
+                                    height: 50px; 
+                                    overflow: hidden; /* Disables scrollbars on the footer frame. To enable scrollbars, change "hidden" to "scroll" */
+                                    background: #CCCCCC;
+                        }
+                                                
+                        #nav {
+                                    position: absolute; 
+                                    top: 80px; /* Set this to the height of the header */
+                                    bottom: 50px; /* Set this to the height of the footer */
+                                    left: 0; 
+                                    width: 260px;
+                                    overflow: scroll; /* Scrollbars will appear on this frame only when there's enough content to require scrolling. To disable scrollbars, change to "hidden", or use "scroll" to enable permanent scrollbars */
+                                    background: grey;               
+                        }
+                        
+                        .innertube {
+                                    margin-left: 40px; /* Provides padding for the content */
+                        }
+                        
+                        p {
+                                    color: #555;
+                        }
+
+                        nav ul {
+                                    list-style-type: none;
+                                    margin: 0;
+                                    padding: 0;
+                        }
+                        
+                        nav ul a {
+                                    color: black;
+                                    text-decoration: none;
+                        }
+                                                
+                        /*IE6 fix*/
+                        * html body{
+                                    padding: 50px 0 50px 230px; /* Set the first value to the height of the header, the third value to the height of the footer, and last value to the width of the nav */
+                        }
+                        
+                        * html main{ 
+                                    height: 100%; 
+                                    width: 100%; 
+                        }
+                        
+                   
+
+</style><script type="text/javascript"></script></head>
+   <body>
+      <header id="header">
+         <div class="innertube" align="center" style="margin-bottom:5px">
+            <h2>Stylesheet Documentation for the XSL : PayloadBuilder.xsl<br><br></h2>
+         </div>
+      </header>
+      <main>
+         <div class="innertube">
+            <div>
+               <h3><a name="version-control"></a>Version Control
+               </h3>
+            </div>
+            <div><a name="xslt-version"></a><h3>XSLT Version </h3>The current XSLT is written in XSLT version <b>2.0</b></div>
+            <div><a name="intro"></a><div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px">
+                  <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"></div>
+                  <div>This XSLT does the following </div>
+               </div><br></div>
+            <div><a name="import"></a><h3>Imported Stylesheets</h3>
+               <li><a href="DateCalc.html">DateCalc.xsl</a></li>
+            </div>
+            <div>
+               <li><a href="StringFunctions.html">StringFunctions.xsl</a></li>
+            </div><a name="vars"></a><h3>Global Variable Definitions</h3>
+            <table style="table-layout: fixed; width: 100%" border="1">
+               <tbody>
+                  <tr>
+                     <th colspan="40%">Variabe Name</th>
+                     <th colspan="60%">Selects</th>
+                  </tr>
+                  <tr>
+                     <td colspan="40%" style="padding-left:0.5cm"><a name="Indicators"></a>Indicators
+                     </td>
+                     <td style="word-wrap: break-word" colspan="60%">
+                        <div style="word-wrap: break-word; padding-left:0.5cm"><a name=""></a>$<a href="#date">date</a>/Indicators&nbsp;
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="40%" style="padding-left:0.5cm"><a name="date"></a>date
+                     </td>
+                     <td style="word-wrap: break-word" colspan="60%">
+                        <div style="word-wrap: break-word; padding-left:0.5cm"><a name=""></a>/root/date&nbsp;
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table><a name="m-template"></a><h3>Matched Templates</h3>
+            <table style="table-layout: fixed; width: 100%" border="1">
+               <tr>
+                  <td><a href="#Template/">/</a></td>
+               </tr>
+            </table><a name="m-template"></a><h3>Match Template Definitions</h3>
+            <div>
+               <h4><a name="Template/">Template : /</a></h4>
+               <div>
+                  <div style="padding-left:0.5cm"><span style="color:maroon">&lt;payload></span><div style="padding-left:0.5cm">
+                        <div style="padding-left:0.5cm"><span style="color:maroon">&lt;date></span><div style="padding-left:0.5cm">
+                              <div>Output the value of the node selected by XPATH : functx:mmddyyyy-to-date($<a href="#date">date</a>/datestring)&nbsp;
+                              </div>
+                           </div><span style="color:maroon">&lt;/date></span></div>
+                        <div style="padding-left:0.5cm"><span style="color:maroon">&lt;description></span><div style="padding-left:0.5cm">
+                              <div>Output the value of the node selected by XPATH : k7:capitalizeFirstLetter(/root/description)&nbsp;</div>
+                           </div><span style="color:maroon">&lt;/description></span></div>
+                     </div><span style="color:maroon">&lt;/payload></span></div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+         </div>
+      </main>
+      <nav id="nav">
+         <div class="innertube">
+            <h2>Table of contents</h2>
+            <ul>
+               <li><a href="#version-control">Version Control</a></li>
+               <li><a href="#xslt-version">XSLT Version</a></li>
+               <li><a href="#intro">Introduction</a></li>
+               <li><a href="#import">Imported Stylesheets </a></li>
+               <li><a href="#vars">Global Variables</a></li>
+               <li><a href="#m-template">Match Templates</a></li>
+               <li><a href="../index.html">XSLT Documentation Index</a></li>
+            </ul>
+         </div>
+      </nav>
+      <footer id="footer">
+         <div class="innertube" align="center" style="margin:5px">
+            <p>Stylesheet Documentation Created by K7-Labs by Vasu Chakkera</p>
+         </div>
+      </footer>
+   </body>
+</html>

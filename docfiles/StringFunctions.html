@@ -1,0 +1,601 @@
+<html xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:k7="http://www.k7-Xsuites.com">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>StringFunctions.xsl</title><style type="text/css">
+         
+                        
+                        
+            
+::-webkit-scrollbar-track
+{
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+            background-color: grey;
+                        border-radius: 10px;
+}
+
+::-webkit-scrollbar
+{
+            width: 10px;
+            background-color: #CCCCCC;
+}
+
+::-webkit-scrollbar-corner
+
+{
+background-color: #CCCCCC; 
+
+}
+
+::-webkit-scrollbar-thumb
+{
+            background-color:  #CCCCCC;
+            background-image: -webkit-linear-gradient(90deg,
+            rgba(0, 0, 0, 1) 0%,
+                                                      rgba(0, 0, 0, 1) 25%,
+                                                      transparent 100%,
+                                                                                                                                      rgba(0, 0, 0, 0) 75%,
+                                                                                                                                      transparent 100%)
+                                                                                                                                      
+}
+                        
+                        body {
+                                    margin: 0;
+                                    padding: 0;
+                                    overflow: hidden;
+                                    height: 100%; 
+                                    max-height: 100%; 
+                                    font-family:"Georgia;"
+            
+                                    line-height: 1.5em;
+                        }
+
+                        main {
+                                    position: fixed;
+                                    top: 80px; /* Set this to the height of 
+
+the header */
+                                    bottom: 50px; /* Set this to the height 
+
+of the footer */
+                                    left: 230px; 
+                                    right: 0;
+                                    overflow: auto; 
+                                    background: #fff;
+                        }
+                                                
+                        #header {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 80px; 
+                                    overflow: hidden; /* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" */
+                                    background: #CCCCCC;
+                        }
+
+                        #footer {
+                                    position: absolute;
+                                    left: 0;
+                                    bottom: 0;
+                                    width: 100%;
+                                    height: 50px; 
+                                    overflow: hidden; /* Disables scrollbars on the footer frame. To enable scrollbars, change "hidden" to "scroll" */
+                                    background: #CCCCCC;
+                        }
+                                                
+                        #nav {
+                                    position: absolute; 
+                                    top: 80px; /* Set this to the height of the header */
+                                    bottom: 50px; /* Set this to the height of the footer */
+                                    left: 0; 
+                                    width: 260px;
+                                    overflow: scroll; /* Scrollbars will appear on this frame only when there's enough content to require scrolling. To disable scrollbars, change to "hidden", or use "scroll" to enable permanent scrollbars */
+                                    background: grey;               
+                        }
+                        
+                        .innertube {
+                                    margin-left: 40px; /* Provides padding for the content */
+                        }
+                        
+                        p {
+                                    color: #555;
+                        }
+
+                        nav ul {
+                                    list-style-type: none;
+                                    margin: 0;
+                                    padding: 0;
+                        }
+                        
+                        nav ul a {
+                                    color: black;
+                                    text-decoration: none;
+                        }
+                                                
+                        /*IE6 fix*/
+                        * html body{
+                                    padding: 50px 0 50px 230px; /* Set the first value to the height of the header, the third value to the height of the footer, and last value to the width of the nav */
+                        }
+                        
+                        * html main{ 
+                                    height: 100%; 
+                                    width: 100%; 
+                        }
+                        
+                   
+
+</style><script type="text/javascript"></script></head>
+   <body>
+      <header id="header">
+         <div class="innertube" align="center" style="margin-bottom:5px">
+            <h2>Stylesheet Documentation for the XSL : StringFunctions.xsl<br><br></h2>
+         </div>
+      </header>
+      <main>
+         <div class="innertube">
+            <div>
+               <h3><a name="version-control"></a>Version Control
+               </h3>
+            </div>
+            <div><a name="xslt-version"></a><h3>XSLT Version </h3>The current XSLT is written in XSLT version <b>2.0</b></div>
+            <div><a name="intro"></a><div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px">
+                  <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"></div>
+                  <div>This XSLT has functions for string manipulations </div>
+               </div><br></div><a name="function"></a><h3>Functions List</h3>
+            <table style="table-layout: fixed; width: 100%" border="1">
+               <tr>
+                  <td><a href="#Templatek7:capitalizeFirstLetter">k7:capitalizeFirstLetter</a></td>
+                  <td><a href="#Templatestring:ucfirst">string:ucfirst</a></td>
+                  <td><a href="#Templatestring:capitalize-words">string:capitalize-words</a></td>
+                  <td><a href="#Template_string:grabword">_string:grabword</a></td>
+               </tr>
+               <tr>
+                  <td><a href="#Templatestring:replace">string:replace</a></td>
+                  <td><a href="#Templatestring:split">string:split</a></td>
+                  <td><a href="#Template_string:createnodes">_string:createnodes</a></td>
+                  <td><a href="#Templatestring:substring-count">string:substring-count</a></td>
+               </tr>
+            </table>
+            <h3>Function Definitions</h3>
+            <div>
+               <h4><a name="Template_string:createnodes">Function : _string:createnodes</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for _string:createnodes</h3>
+                        
+                        <div>This function does the following
+                           
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>a</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>b</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>c</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="_string:createnodes_haystack"></a>haystack
+                     </li>
+                     <li> Name :<a name="_string:createnodes_needle"></a>needle
+                     </li>
+                     <li> Name :<a name="_string:createnodes_nodename"></a>nodename
+                     </li><br></div>
+                  <div><b> Value based one of the following conditions.</b></div>
+                  <div>when the condition :contains($<a href="#_string:createnodes_haystack">haystack</a>,&nbsp;&nbsp;$<a href="#_string:createnodes_needle">needle</a>)&nbsp; is satisfied , then do :
+                     <div style="margin:0.5cm">Creates an element with the specified name in the output.
+                        		
+                        <div>Output the value of the node selected by XPATH : substring-before($<a href="#_string:createnodes_haystack">haystack</a>,&nbsp;&nbsp;$<a href="#_string:createnodes_needle">needle</a>)&nbsp;
+                        </div>
+                        <div> Deep copy the elements defined by the Xpath : _string:<a href="#Template_string:createnodes">createnodes</a>(substring-after($<a href="#_string:createnodes_haystack">haystack</a>,&nbsp;&nbsp;$<a href="#_string:createnodes_needle">needle</a>),&nbsp;&nbsp;$<a href="#_string:createnodes_needle">needle</a>,&nbsp;&nbsp;$<a href="#_string:createnodes_nodename">nodename</a>)&nbsp; and all its children 
+                        </div>
+                     </div>
+                  </div>
+                  <div>If none of the above conditions are satisfied, then do : 
+                     <div style="padding-left:0.5cm">Creates an element with the specified name in the output.
+                        		
+                        <div>Output the value of the node selected by XPATH : $<a href="#_string:createnodes_haystack">haystack</a>&nbsp;
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+            <div>
+               <h4><a name="Template_string:grabword">Function : _string:grabword</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for _string:grabword</h3>
+                        
+                        <div>This function does the following
+                           
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>a</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>b</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>c</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="_string:grabword_haystack"></a>haystack
+                     </li>
+                     <li> Name :<a name="_string:grabword_needle"></a>needle
+                     </li><br></div>
+                  <div><b> Value based one of the following conditions.</b></div>
+                  <div>when the condition :contains($<a href="#_string:grabword_haystack">haystack</a>,&nbsp;&nbsp;$<a href="#_string:grabword_needle">needle</a>)&nbsp; is satisfied , then do :
+                     <div style="margin:0.5cm">
+                        <div>Output the value of the node selected by XPATH : concat(k7:<a href="#Templatek7:capitalizeFirstLetter">capitalizeFirstLetter</a>(substring-before($<a href="#_string:grabword_haystack">haystack</a>,&nbsp;&nbsp;$<a href="#_string:grabword_needle">needle</a>)),&nbsp;&nbsp;$<a href="#_string:grabword_needle">needle</a>)&nbsp;
+                        </div>
+                        <div> Deep copy the elements defined by the Xpath : _string:<a href="#Template_string:grabword">grabword</a>(substring-after($<a href="#_string:grabword_haystack">haystack</a>,&nbsp;&nbsp;$<a href="#_string:grabword_needle">needle</a>),&nbsp;&nbsp;$<a href="#_string:grabword_needle">needle</a>)&nbsp; and all its children 
+                        </div>
+                     </div>
+                  </div>
+                  <div>If none of the above conditions are satisfied, then do : 
+                     <div style="padding-left:0.5cm">
+                        <div>Output the value of the node selected by XPATH : concat(k7:<a href="#Templatek7:capitalizeFirstLetter">capitalizeFirstLetter</a>($<a href="#_string:grabword_haystack">haystack</a>),&nbsp;&nbsp;$<a href="#_string:grabword_needle">needle</a>)&nbsp;
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+            <div>
+               <h4><a name="Templatek7:capitalizeFirstLetter">Function : k7:capitalizeFirstLetter</a></h4>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="k7:capitalizeFirstLetter_in"></a>in
+                     </li><br></div>
+                  <div> Deep copy the elements defined by the Xpath : upper-case(substring($<a href="#k7:capitalizeFirstLetter_in">in</a>,&nbsp;&nbsp;1,&nbsp;&nbsp;1))&nbsp; and all its children 
+                  </div>
+                  <div> Deep copy the elements defined by the Xpath : lower-case(substring($<a href="#k7:capitalizeFirstLetter_in">in</a>,&nbsp;&nbsp;2))&nbsp; and all its children 
+                  </div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+            <div>
+               <h4><a name="Templatestring:capitalize-words">Function : string:capitalize-words</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for string:capitalize-words</h3>
+                        
+                        <div>This function does the following
+                           
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>a</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>b</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>c</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="string:capitalize-words_in"></a>in
+                     </li><br></div>
+                  <div>Output the value of the node selected by XPATH : _string:<a href="#Template_string:grabword">grabword</a>($<a href="#string:capitalize-words_in">in</a>,&nbsp;&nbsp;&nbsp;'&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;)&nbsp;
+                  </div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+            <div>
+               <h4><a name="Templatestring:replace">Function : string:replace</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for string:replace</h3>
+                        
+                        <div>This function does the following
+                           
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>a</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>b</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>c</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="string:replace_in"></a>in
+                     </li>
+                     <li> Name :<a name="string:replace_needle"></a>needle
+                     </li>
+                     <li> Name :<a name="string:replace_replace"></a>replace
+                     </li><br></div>
+                  <div><b> Value based one of the following conditions.</b></div>
+                  <div>when the condition :contains($<a href="#string:replace_in">in</a>,&nbsp;&nbsp;$<a href="#string:replace_needle">needle</a>)&nbsp; is satisfied , then do :
+                     <div style="margin:0.5cm">
+                        <div>Output the value of the node selected by XPATH : substring-before($<a href="#string:replace_in">in</a>,&nbsp;&nbsp;$<a href="#string:replace_needle">needle</a>)&nbsp;
+                        </div>
+                        <div>Output the value of the node selected by XPATH : $<a href="#string:replace_replace">replace</a>&nbsp;
+                        </div>
+                        <div>Output the value of the node selected by XPATH : string:<a href="#Templatestring:replace">replace</a>(substring-after($<a href="#string:replace_in">in</a>,&nbsp;&nbsp;$<a href="#string:replace_needle">needle</a>),&nbsp;&nbsp;$<a href="#string:replace_needle">needle</a>,&nbsp;&nbsp;$<a href="#string:replace_replace">replace</a>)&nbsp;
+                        </div>
+                     </div>
+                  </div>
+                  <div>If none of the above conditions are satisfied, then do : 
+                     <div style="padding-left:0.5cm">
+                        <div>Output the value of the node selected by XPATH : $<a href="#string:replace_in">in</a>&nbsp;
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+            <div>
+               <h4><a name="Templatestring:split">Function : string:split</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for string:split</h3>
+                        
+                        <div>This function does the following
+                           
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>a</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>b</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>c</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="string:split_in"></a>in
+                     </li>
+                     <li> Name :<a name="string:split_delim"></a>delim
+                     </li>
+                     <li> Name :<a name="string:split_rootnode"></a>rootnode
+                     </li>
+                     <li> Name :<a name="string:split_nodename"></a>nodename
+                     </li><br></div>Creates an element with the specified name in the output.
+                  		
+                  <div> Deep copy the elements defined by the Xpath : _string:<a href="#Template_string:createnodes">createnodes</a>($<a href="#string:split_in">in</a>,&nbsp;&nbsp;$<a href="#string:split_delim">delim</a>,&nbsp;&nbsp;$<a href="#string:split_nodename">nodename</a>)&nbsp; and all its children 
+                  </div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+            <div>
+               <h4><a name="Templatestring:substring-count">Function : string:substring-count</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for string:substring-count</h3>
+                        
+                        <div>This function does the following
+                           
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>a</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>b</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>c</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="string:substring-count_haystack"></a>haystack
+                     </li>
+                     <li> Name :<a name="string:substring-count_needle"></a>needle
+                     </li><br></div>
+                  <div><b> Value based one of the following conditions.</b></div>
+                  <div>when the condition :contains($<a href="#string:substring-count_haystack">haystack</a>,&nbsp;&nbsp;$<a href="#string:substring-count_needle">needle</a>)&nbsp;&nbsp;and&nbsp;&nbsp;$<a href="#string:substring-count_haystack">haystack</a>&nbsp;&nbsp;and&nbsp;&nbsp;$<a href="#string:substring-count_needle">needle</a>&nbsp; is satisfied , then do :
+                     <div style="margin:0.5cm">
+                        <tr>
+                           <td>count</td>
+                           <td>
+                              <div> Deep copy the elements defined by the Xpath : string:<a href="#Templatestring:substring-count">substring-count</a>(substring-after($<a href="#string:substring-count_haystack">haystack</a>,&nbsp;&nbsp;$<a href="#string:substring-count_needle">needle</a>),&nbsp;&nbsp;$<a href="#string:substring-count_needle">needle</a>)&nbsp; and all its children 
+                              </div>
+                           </td>
+                        </tr>
+                        <div>Output the value of the node selected by XPATH : $<a href="#string:substring-count_count">count</a>&nbsp;&nbsp;+&nbsp;&nbsp;1&nbsp;
+                        </div>
+                     </div>
+                  </div>
+                  <div>If none of the above conditions are satisfied, then do : 
+                     <div style="padding-left:0.5cm"> Output Text : 0</div>
+                  </div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+            <div>
+               <h4><a name="Templatestring:ucfirst">Function : string:ucfirst</a></h4>
+               <div style="color:grey;border:solid 1px grey; margin-bottom:0.5cm; width:30cm;padding:2px"><i> Information about this function<br>
+                     
+                     <div>
+                        
+                        <h3>Documentation for string:ucfirst</h3>
+                        
+                        <div>This function does the following
+                           
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              
+                              <div>a</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>b</div>
+                              
+                           </li>
+                           
+                           <li>
+                              
+                              <div>c</div>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     </i></div>
+               <div>This function is called with the following parameter.
+                  <div>
+                     <li> Name :<a name="string:ucfirst_in"></a>in
+                     </li><br></div>
+                  <div>Output the value of the node selected by XPATH : k7:<a href="#Templatek7:capitalizeFirstLetter">capitalizeFirstLetter</a>($<a href="#string:ucfirst_in">in</a>)&nbsp;
+                  </div>
+               </div>
+            </div>
+            <div>
+               <hr style="margin-top:0.5cm; border-top:1px solid maroon;">
+            </div>
+         </div>
+      </main>
+      <nav id="nav">
+         <div class="innertube">
+            <h2>Table of contents</h2>
+            <ul>
+               <li><a href="#version-control">Version Control</a></li>
+               <li><a href="#xslt-version">XSLT Version</a></li>
+               <li><a href="#intro">Introduction</a></li>
+               <li><a href="#function">Functions</a></li>
+               <li><a href="../index.html">XSLT Documentation Index</a></li>
+            </ul>
+         </div>
+      </nav>
+      <footer id="footer">
+         <div class="innertube" align="center" style="margin:5px">
+            <p>Stylesheet Documentation Created by K7-Labs by Vasu Chakkera</p>
+         </div>
+      </footer>
+   </body>
+</html>
